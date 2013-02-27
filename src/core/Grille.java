@@ -6,6 +6,6 @@ public class Grille {
 	
 	public Grille(int size) {
 		this.size = size;
-	}
+	}//Daniel est gentil
 
 }
