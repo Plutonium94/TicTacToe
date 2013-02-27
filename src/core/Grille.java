@@ -1,6 +1,5 @@
 package core;
 
-<<<<<<< HEAD
 import java.util.*;
 
 public class Grille {
@@ -9,6 +8,9 @@ public class Grille {
 	public static final String O = "O";
 	public static final String VIDE = ""; 
 	
+	public static final String LIGNE = "ligne";
+	public static final String COLONNE = "colonne";
+	
 	private final int size;
 	private String[][] tableau;
 	
@@ -16,6 +18,12 @@ public class Grille {
 		this.size = size;
 		tableau = new String[size][size];
 	}
+	
+	public boolean gagne() {
+		
+	}
+	
+	private boolean aligneLigneColonneLettre(String lettre,String ligneOuColonne, int nu)
 	
 	public boolean ajouterLettre(String lettre,int ligne,int colonne) {
 		if(!lettre.equals(X) && !lettre.equals(O)) return false;
