@@ -1,5 +1,6 @@
 package core;
 
+<<<<<<< HEAD
 import java.util.*;
 
 public class Grille {
@@ -25,7 +26,6 @@ public class Grille {
 		return true;
 	}
 	
-	private void alignesLigne
 	
 	public String toString() {
 		return "Grille [ size : " + this.size + ", tableau : " + Arrays.toString(this.tableau) + " ]";
