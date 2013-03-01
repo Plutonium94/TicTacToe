@@ -20,7 +20,8 @@ public abstract class GroupeGrilleAbstrait {
 	
 	private int nombreDesGrilles;
 	private Grille[] grilles;
-	boolean independantes;
+	private int taille;
+	private boolean independantes;
 	
 	/**
 	 * Initialize un groupe abstrait des grilles avec le nombre des grilles, leur taille (de chaque grilles)
@@ -32,6 +33,7 @@ public abstract class GroupeGrilleAbstrait {
 	public GroupeGrilleAbstrait(int nombreDesGrilles,int taille, boolean independantes) {
 		this.nombreDesGrilles = nombreDesGrilles;
 		this.independantes = independantes;
+		this.taille = taille;
 		Arrays.fill(grilles, new Grille(taille));
 	}
 	
@@ -82,6 +84,14 @@ public abstract class GroupeGrilleAbstrait {
 	 */
 	public int getNombreDeGrilles() {
 		return this.nombreDesGrilles;
+	}
+	
+	/**
+	 * Renvoie la taille des grilles (même pour toutes)
+	 * @return la taille
+	 */
+	public int getTaille() {
+		return taille;
 	}
 	
 	/**

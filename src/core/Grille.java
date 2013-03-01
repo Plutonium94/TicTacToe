@@ -189,7 +189,13 @@ public class Grille {
 		return true;
 	}
 	
-	
+	/**
+	 * Renvoie la taille de la grille
+	 * @return taille
+	 */
+	public int getTaille() {
+		return taille;
+	}
 	
 	
 	/**
