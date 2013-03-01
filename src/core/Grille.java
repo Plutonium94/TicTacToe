@@ -2,16 +2,55 @@ package core;
 
 import java.util.*;
 
+/**
+ * Cette classe modélise une grille. Une grille est donnée par sa taille.
+ * Une grille contient "taille" nombre des lignes et "taille" nombre des colonnes.
+ * 
+ * Cette classe contient des constants pour pouvoir différencier des lignes des colonnes
+ * et les deux diagonals ainsi que des lettres.
+ * 
+ * Elle contient la méthode ajouterLettre pour rajouter la lettre voulu dans le cas voulu
+ * si ce dernier est vide.
+ * 
+ * Elle contient également la méthode getVainqueur qui renvoie le vainqueur, si la partie est terminée,
+ * sous format String[].
+ * Exemple : {X,C0} si tous les cas de la colonne 0 contiennent X.
+ * 
+ * Attention ! Toute numérotation commence à partir du zéro.
+ * 
+ * @author Daniel
+ *
+ */
 public class Grille {
 	
+	/**
+	 * Un constant qui signifie la lettre X.
+	 */
 	public static final String X = "X";
+	/**
+	 * Un constant qui signifie la lettre O.
+	 */
 	public static final String O = "O";
+	/**
+	 * Un constant qui signifie qu'un cas est vide.
+	 */
 	public static final String VIDE = ""; 
 	
+	/**
+	 * Un constant qui signifie une ligne.
+	 */
 	public static final String LIGNE = "L";
+	/**
+	 * Un constant qui signifie une colonne.
+	 */
 	public static final String COLONNE = "C";
-	
+	/**
+	 * Un constant qui signifie le diagonal haut-droite vers bas-gauche.
+	 */
 	public static final String DIAGONAL_SLASH = "slash";
+	/**
+	 * Un constant qui signifie le diagonal haut-gauche vers bas-droite.
+	 */
 	public static final String DIAGONAL_ANTI_SLASH = "antislash";
 	
 	private final int taille;
