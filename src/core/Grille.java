@@ -35,7 +35,10 @@ public class Grille {
 	 * Un constant qui signifie qu'un cas est vide.
 	 */
 	public static final String VIDE = ""; 
-	
+	/**
+	 * Un constant qui signifie un cas
+	 */
+	public static final String CAS = "CAS";
 	/**
 	 * Un constant qui signifie une ligne.
 	 */
