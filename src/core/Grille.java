@@ -200,6 +200,16 @@ public class Grille {
 		return taille;
 	}
 	
+	/**
+	 * Renvoie la valeur du cas formé par la ligne et colonne donnée
+	 * @param ligne
+	 * @param colonne
+	 * @return la lettre dans le cas
+	 */
+	public String getValeurCas(int ligne,int colonne) {
+		return this.tableau[ligne][colonne];
+	}
+	
 	
 	/**
 	 * Renvoie une représentation textuelle de la grille
