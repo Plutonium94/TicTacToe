@@ -39,7 +39,7 @@ public class Grille {
 		this.taille = taille;
 		this.id = id;
 		tableau = new Lettre[taille][taille];
-		Arrays.fill(tableau,null);
+		//Arrays.fill(tableau,null);
 	}
 	
 	/**
@@ -47,7 +47,11 @@ public class Grille {
 	 * @param taille
 	 */
 	public Grille(int taille) {
-		this(taille, Integer.MIN_VALUE);
+		this(Integer.MIN_VALUE, taille);
+	}
+	
+	public int getId() {
+		return id;
 	}
 	
 	/**
@@ -59,6 +63,7 @@ public class Grille {
 	 * @return true si l'ajout est fait, false sinon
 	 */
 	public boolean ajouterLettre(Lettre lettre,int ligne,int colonne) {
+		if(lettre==null) return false;
 		if(!lettre.equals(X) && !lettre.equals(O)) return false;
 		if(ligne < 0 || ligne >= taille) return false;
 		if(colonne < 0 || ligne >= taille) return false;
@@ -106,13 +111,17 @@ public class Grille {
 	private Cas[] aligneLigneLettre(Lettre lettre, int numeroLigne) {
 		Cas[] res = new Cas[taille];
 		Lettre premierCasDeLigne = this.tableau[numeroLigne][0];
-		if(!premierCasDeLigne.equals(lettre)) return null;
+		if(premierCasDeLigne == null || !premierCasDeLigne.equals(lettre)) return null;
 		else res[0] = new Cas(this, lettre,numeroLigne,0);
 		for(int i=1;i<taille;i++) {
-			if(!tableau[numeroLigne][i].equals(premierCasDeLigne)) return null;
+			if(tableau[numeroLigne][i] == null) return null;
+			if(tableau[numeroLigne][i] != null && !tableau[numeroLigne][i].equals(premierCasDeLigne)) return null;
 			else res[i] = new Cas(this, lettre,numeroLigne,i);
 		}
-		return res;
+		if(res[res.length - 1] != null) {
+			System.out.println("culprit ligne " + numeroLigne);
+			return res;
+		} return null;
 	}
 	
 	/**
@@ -124,13 +133,18 @@ public class Grille {
 	private Cas[] aligneColonneLettre(Lettre lettre, int numeroColonne) {
 		Cas[] res = new Cas[taille];
 		Lettre premierCasDeColonne = tableau[0][numeroColonne];
-		if(!premierCasDeColonne.equals(lettre)) return null;
+		if(premierCasDeColonne == null || !premierCasDeColonne.equals(lettre)) return null;
 		else res[0] = new Cas(this, lettre,0,numeroColonne);
 		for(int i=1;i<taille;i++) {
-			if(!tableau[i][numeroColonne].equals(premierCasDeColonne)) return null;
+			if(tableau[i][numeroColonne] == null) return null;
+			if(tableau[i][numeroColonne] != null && !tableau[i][numeroColonne].equals(premierCasDeColonne)) return null;
 			else res[i] = new Cas(this, lettre,i,numeroColonne);
 		}
-		return res;
+		if(res[res.length - 1] != null) {
+			System.out.println("culprit c " + numeroColonne);
+			return res;
+		}
+		return null;
 	}
 	
 	/**
@@ -142,13 +156,18 @@ public class Grille {
 	private Cas[] aligneDiagonaleAntiSlashLettre(Lettre lettre) {
 		Cas[] res = new Cas[taille];
 		Lettre premierCasDeDiagonal = tableau[0][0];
-		if(!premierCasDeDiagonal.equals(lettre)) return null;
+		if(premierCasDeDiagonal == null || !premierCasDeDiagonal.equals(lettre)) return null;
 		else res[0] = new Cas(this,lettre,0,0);
 		for(int i = 1; i < taille; i++) {
-			if(!tableau[i][i].equals(premierCasDeDiagonal)) return null;
+			if(tableau[i][i] == null) return null;
+			if(tableau[i][i] != null && !tableau[i][i].equals(premierCasDeDiagonal)) return null;
 			else res[i] = new Cas(this,lettre, i, i);
 		}
-		return res;
+		if(res[res.length - 1] != null) {
+			System.out.println("culprit \\");
+			return res;
+		}
+		return null;
 	}
 	
 	/**
@@ -160,11 +179,16 @@ public class Grille {
 	private Cas[] aligneDiagonaleSlashLettre(Lettre lettre) {
 		Cas[] res = new Cas[taille];
 		Lettre premierCasDeDiagonal = tableau[taille-1][0];
-		if(!premierCasDeDiagonal.equals(lettre)) return null;
+		if(premierCasDeDiagonal == null || !premierCasDeDiagonal.equals(lettre)) return null;
 		else res[0] = new Cas(this, lettre,taille-1,0);
-		for(int i=taille-1, j=1; i < taille; i--,j++) {
-			if(!tableau[i][j].equals(premierCasDeDiagonal)) return null;
-			else res[i] = new Cas(this,lettre,i,j);
+		for(int ligne=taille-1, colonne=0; colonne < taille; ligne--,colonne++) {
+			if(tableau[ligne][colonne] == null) return null;
+			if(tableau[ligne][colonne] != null && !tableau[ligne][colonne].equals(lettre)) return null;
+			else res[colonne] = new Cas(this,lettre,ligne,colonne);
+		}
+		if(res[res.length - 1] != null) {
+			System.out.println("culprit /");
+			return res;
 		}
 		return res;
 	}
@@ -195,7 +219,7 @@ public class Grille {
 	 */
 	public String toString() {
 		return "Grille [ id : "+ id + ", taille : " + this.taille + ", tableau : " + 
-				Arrays.toString(this.tableau) + " ]";
+				Arrays.deepToString(this.tableau) + " ]";
 	}
 
 }
