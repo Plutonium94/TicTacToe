@@ -18,6 +18,12 @@ public class GroupeGrilleIndependantes extends GroupeGrilleAbstrait {
 		super(nombreDesGrilles,taille,true);
 	}
 	
+	public Cas[] getVainqueur() {
+		Cas[] res = new Cas[getTaille()];
+		if((res = super.getVainqueur()) != null) return res;
+		return null;
+	}
+	
 	/**
 	 * Renvoie une représentation textuelle du groupe des grilles 
 	 * indépendantes.

@@ -8,8 +8,7 @@ import java.util.*;
  * leur indépendance par rapport à l'une et l'autre.
  * 
  * Cette classe contient la méthode getVainqueur, pour obtenir le vainqueur d'une partie si celle-ci est terminée.
- * Elle renvoie ses résultats sous format String : {numero de Grille, Lettre, Alignement}
- * Exemple : {G2, X, L0} signifie que tous les cas de la ligne 0 de la grille 2 contiennent X.
+ * Cette méthode considère que les grilles sont indépendantes.
  * 
  * Attention ! Toute numérotation commence à partir du zéro.
  *
@@ -34,26 +33,22 @@ public abstract class GroupeGrilleAbstrait {
 		this.nombreDesGrilles = nombreDesGrilles;
 		this.independantes = independantes;
 		this.taille = taille;
-		Arrays.fill(grilles, new Grille(taille));
+		for(int i=0; i<nombreDesGrilles;i++) {
+			grilles[i] = new Grille(i,taille);
+		}
 	}
 	
 	/**
-	 * Renvoie le vainqueur de la partie (si elle est terminée), son alignement et sa grille sous
-	 * format d'un String[]. Si la partie n'est pas terminée cette méthode renvoie null.
-	 * Exemple : {G0, O, L2} signifie que tous les cas de la ligne 2 de la grille 0 contiennent O.
-	 * Exmeple : {G1, X, C0} signifie que tous les cas de la colonne 0 de la grille 1 contiennent X. 
-	 * @return Si la partie est terminée, un String[] contenant la lettre, alignement et grille de la vainqueur.
+	 * Renvoie les cas formant l'alignement gagnant de la partie (si elle est terminée), sous format d'un Cas[].
+	 * Si la partie n'est pas terminée cette méthode renvoie null.
+	 * Attention ! Cette méthode considère que les grilles sont indépendantes de l'une et l'autre.
+	 * @return Si la partie est terminée, un Cas[] contenant les cas d'alignement.
 	 *         Sinon, null
 	 */
-	public String[] getVainqueur() {
-		String[] res = new String[3];
+	public Cas[] getVainqueur() {
+		Cas[] res = new Cas[taille];
 		for(int i=0; i< grilles.length; i++) {
-			String[] vainqueurDeGrille = grilles[i].getVainqueur();
-			if(vainqueurDeGrille != null) {
-				System.arraycopy(vainqueurDeGrille, 0, res, 1, 2);
-				res[0] = "G" + i;
-				return res;
-			}
+			if((res = grilles[i].getVainqueur()) != null) return res;
 		}
 		return null;
 	}
