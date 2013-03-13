@@ -5,25 +5,10 @@ import java.util.Arrays;
 import core.*;
 import static java.lang.System.out;
 import static core.Lettre.*;
+import static tests.Util.*;
 
 public class GrilleTest {
 	
-	public static Grille tableauToGrille(Lettre... lettres) {
-		int taille = (int)Math.sqrt(lettres.length);
-		Grille res = new Grille(taille);
-		for(int i=0;i<lettres.length;i++) {
-			res.ajouterLettre(lettres[i], i/taille, i%taille);
-		}
-		return res; 
-	}
-	
-	public static String show(Object[] objets) {
-		//if(objects == n)
-		return Arrays.toString(objets);
-	}
-	
-	
-
 	/**
 	 * @param args
 	 */

@@ -6,7 +6,7 @@ package core;
  * @author Daniel 
  *
  */
-public class GroupeGrilleDepandantes extends GroupeGrilleAbstrait {
+public class GroupeGrilleDependantes extends GroupeGrilleAbstrait {
 	
 	/**
 	 * Initialize un groupe des grilles dépandantes avec le nombre des grilles et
@@ -14,7 +14,7 @@ public class GroupeGrilleDepandantes extends GroupeGrilleAbstrait {
 	 * @param nombreDesGrilles
 	 * @param taille
 	 */
-	public GroupeGrilleDepandantes(int nombreDeGrilles) {
+	public GroupeGrilleDependantes(int nombreDeGrilles) {
 		super(nombreDeGrilles, nombreDeGrilles, false);
 	}
 	
@@ -44,9 +44,10 @@ public class GroupeGrilleDepandantes extends GroupeGrilleAbstrait {
 		int nombreDeGrilles = this.getNombreDeGrilles();
 		int taille = getTaille();
 		Grille[] grilles = this.getGrilles();
-		boolean estAligne = true;
+		
 		for(int ligne=0;ligne<taille;ligne++) {
 			for(int colonne=0; colonne<taille;colonne++) {
+				boolean estAligne = true;
 				Cas[] res = new Cas[nombreDeGrilles];
 				Lettre lettre = grilles[0].getValeurCas(ligne,colonne);
 				res[0] = new Cas(grilles[0],lettre,ligne,colonne);
@@ -56,7 +57,10 @@ public class GroupeGrilleDepandantes extends GroupeGrilleAbstrait {
 						res[numeroGrille] = new Cas(grilles[numeroGrille],lettre,ligne,colonne);
 					} else estAligne = false;
 				}
-				if(estAligne) return res;
+				if(estAligne) {
+					System.out.println("culprit colonne non inclinee Z : " + "["+ligne+","+colonne+"]");
+					return res;
+				}
 			}
 		}
 		return null;
@@ -75,15 +79,16 @@ public class GroupeGrilleDepandantes extends GroupeGrilleAbstrait {
 			Lettre lettre = grilles[0].getValeurCas(0,colonne);
 			res[0] = new Cas(grilles[0],lettre,0,colonne);
 			boolean estAligne = true;
-			for(int numeroGrille=0;numeroGrille<taille;numeroGrille++) {
-				for(int ligne = 0; ligne < taille; numeroGrille++) {
-					if(estAligne && lettre != null && lettre.equals(grilles[numeroGrille].getValeurCas(ligne, colonne)) ) {
-						res[numeroGrille] = new Cas(grilles[numeroGrille],lettre,ligne,colonne);
-						estAligne = true;
-					} else estAligne = false;
-				}
+			for(int numeroGrille=1,ligne =1;numeroGrille<taille;numeroGrille++,ligne++) {
+				if(estAligne && lettre != null && lettre.equals(grilles[numeroGrille].getValeurCas(ligne, colonne)) ) {
+					res[numeroGrille] = new Cas(grilles[numeroGrille],lettre,ligne,colonne);
+					estAligne = true;
+				} else estAligne = false;
 			}
-			if(estAligne) return res;
+			if(estAligne) {
+				System.out.println("culprit colonne incline Z : " + colonne);
+				return res;
+			}
 		}
 		return null;
 	}
@@ -101,15 +106,16 @@ public class GroupeGrilleDepandantes extends GroupeGrilleAbstrait {
 			Lettre lettre = grilles[0].getValeurCas(ligne, 0);
 			res[0] = new Cas(grilles[0],lettre,ligne,0);
 			boolean estAligne = true;
-			for(int numeroGrille = 0; numeroGrille < grilles.length; numeroGrille++) {
-				for(int colonne = 0; colonne <taille; colonne++) {
-					if(estAligne && lettre != null && grilles[numeroGrille].getValeurCas(ligne, colonne).equals(lettre)) {
-						res[numeroGrille] = new Cas(grilles[numeroGrille],lettre,ligne,colonne);
-						estAligne = true;
-					} else estAligne = false;
-				}
+			for(int numeroGrille = 1,colonne = 1; numeroGrille < grilles.length; numeroGrille++,colonne++) {
+				if(estAligne && lettre != null && lettre.equals(grilles[numeroGrille].getValeurCas(ligne, colonne))) {
+					res[numeroGrille] = new Cas(grilles[numeroGrille],lettre,ligne,colonne);
+					estAligne = true;
+				} else estAligne = false;
 			}
-			if(estAligne) return res;
+			if(estAligne) {
+				System.out.println("Culprit : ligne incline " + ligne);
+				return res;
+			}
 		}
 		return null;
 	}
@@ -128,6 +134,7 @@ public class GroupeGrilleDepandantes extends GroupeGrilleAbstrait {
 				res[numeroGrille] = new Cas(grilles[numeroGrille],lettre,ligne,colonne);
 			} else return null;
 		}
+		System.out.println("Culprit : \\ Z");
 		return res;
 	}
 	
@@ -140,13 +147,14 @@ public class GroupeGrilleDepandantes extends GroupeGrilleAbstrait {
 		int taille = getTaille();
 		Grille[] grilles = getGrilles();
 		Cas[] res = new Cas[taille];
-		Lettre lettre = grilles[0].getValeurCas(taille - 1, 0);
-		res[0] = new Cas(grilles[0], lettre, taille-1,0);
-		for(int numeroGrille = 0, ligne = taille-1, colonne = 0 ; numeroGrille < grilles.length; numeroGrille++,ligne--,colonne++) {
+		Lettre lettre = grilles[0].getValeurCas(taille-1, taille-1);
+		res[0] = new Cas(grilles[0], lettre, taille-1,taille-1);
+		for(int numeroGrille = 0, ligne = taille-1 , colonne = taille-1 ; numeroGrille < grilles.length; numeroGrille++,ligne--,colonne--) {
 			if(lettre != null && lettre.equals(grilles[numeroGrille].getValeurCas(ligne, colonne))) {
 				res[numeroGrille] = new Cas(grilles[numeroGrille],lettre,ligne,colonne);
 			} else return null;
 		}
+		System.out.println("Culprit : / Z");
 		return res;
 	}
 	

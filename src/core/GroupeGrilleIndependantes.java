@@ -18,6 +18,7 @@ public class GroupeGrilleIndependantes extends GroupeGrilleAbstrait {
 		super(nombreDesGrilles,taille,true);
 	}
 	
+	@Override
 	public Cas[] getVainqueur() {
 		Cas[] res = new Cas[getTaille()];
 		if((res = super.getVainqueur()) != null) return res;

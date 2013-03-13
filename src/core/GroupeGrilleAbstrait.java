@@ -33,6 +33,7 @@ public abstract class GroupeGrilleAbstrait {
 		this.nombreDesGrilles = nombreDesGrilles;
 		this.independantes = independantes;
 		this.taille = taille;
+		grilles = new Grille[nombreDesGrilles];
 		for(int i=0; i<nombreDesGrilles;i++) {
 			grilles[i] = new Grille(i,taille);
 		}
@@ -95,6 +96,14 @@ public abstract class GroupeGrilleAbstrait {
 	 */
 	public Grille[] getGrilles() {
 		return grilles;
+	}
+	
+	public boolean ajouterLettre(int idGrille, Lettre lettre,int ligne, int colonne ) {
+		if(grilles[idGrille].getValeurCas(ligne, colonne) == null) {
+			grilles[idGrille].ajouterLettre(lettre, ligne, colonne);
+			return true;
+		}
+		else return false;
 	}
 	
 	/**
