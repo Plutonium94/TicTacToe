@@ -103,7 +103,7 @@ public abstract class GroupeGrilleAbstrait {
 	public String toString() {
 		return this.getClass().getSimpleName() + " [ nombreDeGrilles : " + this.nombreDesGrilles
 				+ ", independantes : " + this.independantes 
-				+ ", grilles : " + Arrays.toString(grilles) + " ]"; 
+				+ ", grilles : " + Arrays.toString(grilles) + " ]";
 	}
 	
 
