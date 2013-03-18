@@ -17,10 +17,10 @@ import java.util.*;
  */
 public abstract class GroupeGrilleAbstrait {
 	
-	private int nombreDesGrilles;
-	private Grille[] grilles;
-	private int taille;
-	private boolean independantes;
+	protected int nombreDesGrilles;
+	protected Grille[] grilles;
+	protected int taille;
+	protected boolean independantes;
 	
 	/**
 	 * Initialize un groupe abstrait des grilles avec le nombre des grilles, leur taille (de chaque grilles)

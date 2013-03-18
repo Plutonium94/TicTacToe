@@ -22,8 +22,8 @@ import static core.Lettre.*;
 public class Grille {
 
 	
-	private final int taille;
-	private Lettre[][] tableau;
+	protected final int taille;
+	protected Lettre[][] tableau;
 	/**
 	 * L'id permet de différencier les grilles dans un groupe des grilles.
 	 * Attention c'est au groupe de donner un id unique à ses grilles.
