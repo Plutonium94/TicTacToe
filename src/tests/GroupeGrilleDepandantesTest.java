@@ -36,9 +36,9 @@ public class GroupeGrilleDepandantesTest {
 		out.println("\nalignement colonne non-incline Z reussi");
 		GroupeGrilleDependantes ggd3 = (GroupeGrilleDependantes)Util.initGroupe(
 				false,
-				tableauToGrille(null,null,null,null,null,null,null,X,O),
-				tableauToGrille(X,O,O,O,O,X,null,X,X),
-				tableauToGrille(O,O,X,X,X,O,null,X,null));
+				tableauToGrille(null,null,O,null,null,null,null,null,X),
+				tableauToGrille(null,null,O,null,null,null,null,null,X),
+				tableauToGrille(null,null,O,null,null,null,null,null,null));
 		out.println(ggd3);
 		out.println(show(ggd3.getVainqueur()));
 		
