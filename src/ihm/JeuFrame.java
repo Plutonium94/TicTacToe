@@ -17,7 +17,7 @@ public class JeuFrame extends JFrame {
 		setTitle("Tic Tac Toe");
 		setLocationRelativeTo(null);
 		this.setBackground(Color.WHITE);
-		this.setContentPane(Niveau.UN.getGroupeGrillePanel().getPanel());
+		this.setContentPane(Niveau.TROIS.getGroupeGrillePanel().getPanel());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}

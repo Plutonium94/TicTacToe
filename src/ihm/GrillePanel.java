@@ -54,13 +54,13 @@ public class GrillePanel extends Grille {
 				// animation victoire
 				Cas[] vainqueur = ggp.getVainqueur();
 				if(ggp.getVainqueur() != null) {
-					out.println("xon");
+					out.println("won");
 					for(Cas c : vainqueur) {
 						if(c.getGrilleId() == id) {
 							int ligne = c.getLigne();
 							int colonne = c.getColonne();
 							graphics.setColor(Color.RED);
-							graphics.drawRect(ligne*casWidth, colonne*casWidth, casWidth, casWidth);
+							graphics.drawRect(colonne*casWidth, ligne*casWidth, casWidth, casWidth);
 						}
 					}
 				}

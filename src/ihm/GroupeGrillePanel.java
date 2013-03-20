@@ -29,13 +29,29 @@ public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseList
 	}
 	
 	public void winCheckFormalities() {
-		vainqueur = super.getVainqueur();
-		System.out.println(super.toString());
+		if(this.independantes) vainqueur = super.getVainqueur();
+		else {
+			GroupeGrilleDependantes ggd = new GroupeGrilleDependantes(this.nombreDesGrilles);
+			for(int grilleId = 0; grilleId< this.grilles.length; grilleId++) {
+				for(int ligne = 0; ligne < taille ; ligne++) {
+					for(int colonne = 0; colonne < taille; colonne++) {
+						ggd.ajouterLettre(grilleId, this.grilles[grilleId].getValeurCas(ligne, colonne), ligne, colonne);
+					}
+				}
+			}
+			vainqueur = ggd.getVainqueur();
+		}
+		//System.out.println(super.toString());
 		if(vainqueur !=null) {
 			System.out.println("win check formalities entered");
 			superPanel.revalidate();
 			superPanel.repaint();
 		}
+	}
+	
+	@Override
+	public Cas[] getVainqueur() {
+		return this.vainqueur;
 	}
 	
 	private void frameFormalities() {

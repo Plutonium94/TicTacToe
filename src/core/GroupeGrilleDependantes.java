@@ -44,7 +44,7 @@ public class GroupeGrilleDependantes extends GroupeGrilleAbstrait {
 		int nombreDeGrilles = this.getNombreDeGrilles();
 		int taille = getTaille();
 		Grille[] grilles = this.getGrilles();
-		
+		System.out.println(super.toString());
 		for(int ligne=0;ligne<taille;ligne++) {
 			for(int colonne=0; colonne<taille;colonne++) {
 				boolean estAligne = true;
