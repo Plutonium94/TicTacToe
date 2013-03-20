@@ -18,6 +18,10 @@ public class GrillePanel extends Grille {
 	JPanel panel;
 	private int size = GrillePanel.DEFAULT_SIZE;
 	
+	
+	public static final Color DARK_BLUE = CLR1.getColor();
+	public static final Color YELLOW  = CLR2.getColor();
+	
 	@SuppressWarnings("serial")
 	public GrillePanel(final int id,final int taille,final GroupeGrillePanel ggp) {
 		super(id,taille);
@@ -31,9 +35,9 @@ public class GrillePanel extends Grille {
 					for(int j=0;j<taille;j++) {
 						Color couleur = null;
 						if(i%2 == j%2) {
-							couleur = Color.BLUE;
+							couleur = DARK_BLUE;
 						} else {
-							couleur = Color.YELLOW;
+							couleur = YELLOW;
 						}
 						graphics.setColor(couleur);
 						graphics.fillRect(i*casWidth, j*casWidth, casWidth,casWidth);
@@ -92,8 +96,8 @@ public class GrillePanel extends Grille {
 	}
 	
 	private static Color couleurContraire(Color c) {
-		if(c.equals(Color.)) return Color.YELLOW;
-		else return Color.BLUE;
+		if(c.equals(DARK_BLUE)) return YELLOW;
+		else return DARK_BLUE;
 	}
 
 }
