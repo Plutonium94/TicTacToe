@@ -29,7 +29,7 @@ public class Grille {
 	 * Attention c'est au groupe de donner un id unique à ses grilles.
 	 * La classe grille ne s'occupe pas de cela.
 	 */
-	private final int id;
+	protected final int id;
 	
 	/**
 	 * Crée un objet Grille de taille taille
@@ -66,9 +66,11 @@ public class Grille {
 		if(lettre==null) return false;
 		if(!lettre.equals(X) && !lettre.equals(O)) return false;
 		if(ligne < 0 || ligne >= taille) return false;
-		if(colonne < 0 || ligne >= taille) return false;
-		this.tableau[ligne][colonne] = lettre;
-		return true;
+		if(colonne < 0 || colonne >= taille) return false;
+		if(this.tableau[ligne][colonne] == null) {
+			this.tableau[ligne][colonne] = lettre;
+			return true;
+		} return false;
 	}
 	
 	/**
