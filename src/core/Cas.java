@@ -44,6 +44,10 @@ public class Cas {
 	public int getColonne() {
 		return colonne;
 	}
+	
+	public int getGrilleId() {
+		return grille.getId();
+	}
 
 	
 }
