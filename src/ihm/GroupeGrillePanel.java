@@ -7,6 +7,11 @@ import java.awt.*;
 import core.*;
 import java.awt.event.*;
 
+/**
+ * Représentation graphique d'une groupe des grilles
+ * @author Daniel
+ *
+ */
 public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseListener {
 	
     GrillePanel[] grillePanels;
@@ -25,7 +30,7 @@ public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseList
 		}
 		frameFormalities();
 		addToPanel();
-		superPanel.setBackground(Color.GREEN);
+		superPanel.setBackground(Color.WHITE);
 	}
 	
 	public GroupeGrillePanel(GroupeGrilleAbstrait gga) {
