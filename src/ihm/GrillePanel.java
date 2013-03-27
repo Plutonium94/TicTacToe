@@ -7,6 +7,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * Représentation graphique d'une grille
+ * @author Daniel
+ *
+ */
 public class GrillePanel extends Grille {
 	
 	private GroupeGrillePanel ggp;
@@ -29,6 +34,9 @@ public class GrillePanel extends Grille {
 		panel = new JPanel() {
 			@Override
 			public void paint(Graphics graphics) {
+				// Travail régulière 
+				// Met les lettres de la grille correspondnate
+				// dans les cases précises
 				int casWidth = size/taille;
 				for(int i=0;i<taille;i++) {
 					for(int j=0;j<taille;j++) {
@@ -50,6 +58,7 @@ public class GrillePanel extends Grille {
 				}
 				
 				// animation victoire
+				// encadre les cas gangants en vert epaisse
 				Cas[] vainqueur = ggp.getVainqueur();
 				if(ggp.getVainqueur() != null) {
 					for(Cas c : vainqueur) {
@@ -70,7 +79,9 @@ public class GrillePanel extends Grille {
 	}
 	
 	
-	
+	/**
+	 * Setup du panel
+	 */
 	private void panelFormalities() {
 		panel.setBounds(0,0,300,300);
 		panel.setVisible(true);
