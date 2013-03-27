@@ -85,10 +85,10 @@ public class GrillePanel extends Grille {
 			int casWidth = size/taille;
 			Lettre lettreCourante = ggp.getLettreCourante();
 			ggp.ajouterLettre(id, lettreCourante, y/casWidth, x/casWidth);
-			ajouterLettre(lettreCourante,x/casWidth , y/casWidth);
+			boolean lettreAjoutee = ajouterLettre(lettreCourante,x/casWidth , y/casWidth);
 			panel.revalidate();
 			panel.repaint();
-			ggp.changerLettre();
+			if(lettreAjoutee)ggp.changerLettre();
 			ggp.winCheckFormalities();
 		}
 	}
