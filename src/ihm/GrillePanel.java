@@ -2,7 +2,6 @@ package ihm;
 
 import static java.lang.System.out;
 import static ihm.Couleur.*;
-import static core.Lettre.*;
 import core.*;
 import javax.swing.*;
 import java.awt.*;
@@ -42,7 +41,6 @@ public class GrillePanel extends Grille {
 						graphics.setColor(couleur);
 						graphics.fillRect(i*casWidth, j*casWidth, casWidth,casWidth);
 						Lettre lettre = getValeurCas(i, j);
-						//out.println("Lettre : " + lettre);
 						if(lettre != null) {
 							graphics.setColor(couleurContraire(couleur));
 							graphics.setFont(new Font("Tahoma",Font.BOLD,36));
@@ -54,11 +52,11 @@ public class GrillePanel extends Grille {
 				// animation victoire
 				Cas[] vainqueur = ggp.getVainqueur();
 				if(ggp.getVainqueur() != null) {
-					out.println("won");
 					for(Cas c : vainqueur) {
 						if(c.getGrilleId() == id) {
 							int ligne = c.getLigne();
 							int colonne = c.getColonne();
+							((Graphics2D)graphics).setStroke(new BasicStroke(10));
 							graphics.setColor(Color.RED);
 							graphics.drawRect(colonne*casWidth, ligne*casWidth, casWidth, casWidth);
 						}

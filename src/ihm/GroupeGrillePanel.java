@@ -12,6 +12,7 @@ public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseList
     GrillePanel[] grillePanels;
 	private Lettre lettreCourante = O;
 	private Cas[] vainqueur = null;
+	private GroupeGrilleDependantes ggd = null;
 	
 	JPanel superPanel = new JPanel();
 	
@@ -19,6 +20,9 @@ public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseList
 	public GroupeGrillePanel(int nombreDeGrilles, int taille, boolean independantes) {
 		super(nombreDeGrilles,taille,independantes);
 		grillePanels = new GrillePanel[nombreDeGrilles];
+		if(!independantes) {
+			initGGD();
+		}
 		frameFormalities();
 		addToPanel();
 		superPanel.setBackground(Color.GREEN);
@@ -28,17 +32,23 @@ public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseList
 		this(gga.getNombreDeGrilles(),gga.getTaille(),gga.sontIndependantes());
 	}
 	
+	private void initGGD() {
+		ggd = new GroupeGrilleDependantes(this.nombreDesGrilles);
+		for(int grilleId = 0; grilleId< this.grilles.length; grilleId++) {
+			for(int ligne = 0; ligne < taille ; ligne++) {
+				for(int colonne = 0; colonne < taille; colonne++) {
+					ggd.ajouterLettre(grilleId, this.grilles[grilleId].getValeurCas(ligne, colonne), ligne, colonne);
+				}
+			}
+		}
+		System.out.println("ggd initialized " + ggd);
+	}
+	
 	public void winCheckFormalities() {
 		if(this.independantes) vainqueur = super.getVainqueur();
 		else {
-			GroupeGrilleDependantes ggd = new GroupeGrilleDependantes(this.nombreDesGrilles);
-			for(int grilleId = 0; grilleId< this.grilles.length; grilleId++) {
-				for(int ligne = 0; ligne < taille ; ligne++) {
-					for(int colonne = 0; colonne < taille; colonne++) {
-						ggd.ajouterLettre(grilleId, this.grilles[grilleId].getValeurCas(ligne, colonne), ligne, colonne);
-					}
-				}
-			}
+			System.out.println("ggd's vainqueur");
+			initGGD();
 			vainqueur = ggd.getVainqueur();
 		}
 		//System.out.println(super.toString());
