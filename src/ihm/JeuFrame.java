@@ -5,6 +5,11 @@ import java.awt.event.*;
 import java.awt.*;
 
 @SuppressWarnings("serial")
+/**
+ * La classe qui est appéle par le main (sans les menus).
+ * @author Daniel
+ *
+ */
 public class JeuFrame extends JFrame {
 	
 	private final Niveau[] niveaux = Niveau.values();
@@ -39,6 +44,12 @@ public class JeuFrame extends JFrame {
 		this.getContentPane().repaint();
 	}
 	
+	/**
+	 * Contient 2 boutons < & > pour aller s'ils existent aux niveaux précedentes et aux niveaux 
+	 * suivantes (si gagnés) respectivement.
+	 * @author Daniel
+	 *
+	 */
 	private class ButtonPanel extends JPanel {
 		
 		private JButton nextLevelButton = new JButton(">");
@@ -50,11 +61,17 @@ public class JeuFrame extends JFrame {
 			this.setNextLevelAction();
 		}
 		
+		/**
+		 * Rajoute composantes au frame
+		 */
 		private void addToPanel() {
 			add(previousLevelButton);
 			add(nextLevelButton);
 		}
 		
+		/**
+		 * Passe au niveau prochain (si gagné) sur appui du bouton
+		 */
 		private void setNextLevelAction() {
 			this.nextLevelButton.addActionListener(new ActionListener() {
 				@Override
@@ -76,6 +93,9 @@ public class JeuFrame extends JFrame {
 			});
 		}
 		
+		/**
+		 * Aller au niveau précedente sur click
+		 */
 		private void setPreviousLevelAction() {
 			this.previousLevelButton.addActionListener(new ActionListener() {
 				@Override

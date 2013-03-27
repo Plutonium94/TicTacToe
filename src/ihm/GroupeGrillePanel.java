@@ -17,11 +17,14 @@ public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseList
     GrillePanel[] grillePanels;
 	private Lettre lettreCourante = O;
 	private Cas[] vainqueur = null;
+	// Cet attribut ggd est une mauvaise conception mais utile pour
+	// voir si on a gagné le niveau 3
 	private GroupeGrilleDependantes ggd = null;
 	
+	// Le panel effectif
 	JPanel superPanel = new JPanel();
 	
-	
+
 	public GroupeGrillePanel(int nombreDeGrilles, int taille, boolean independantes) {
 		super(nombreDeGrilles,taille,independantes);
 		grillePanels = new GrillePanel[nombreDeGrilles];
@@ -37,6 +40,10 @@ public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseList
 		this(gga.getNombreDeGrilles(),gga.getTaille(),gga.sontIndependantes());
 	}
 	
+	/**
+	 * Initialize la variable ggd. Utile que pour voir si 
+	 * le niveau trois a été gagné
+	 */
 	private void initGGD() {
 		ggd = new GroupeGrilleDependantes(this.nombreDesGrilles);
 		for(int grilleId = 0; grilleId< this.grilles.length; grilleId++) {
@@ -46,18 +53,23 @@ public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseList
 				}
 			}
 		}
-		System.out.println("ggd initialized " + ggd);
 	}
 	
+	/**
+	 * Vérifie si le niveau est gagné.
+	 */
 	public void winCheckFormalities() {
 		if(this.independantes) vainqueur = super.getVainqueur();
 		else {
+			/*
+			 * Vérifie si le niveau 3 est gagné.
+			 */
 			System.out.println("ggd's vainqueur");
 			initGGD();
 			vainqueur = ggd.getVainqueur();
 		}
-		//System.out.println(super.toString());
 		if(vainqueur !=null) {
+			// mis à jour de l'écran (panel) si gagné
 			System.out.println("win check formalities entered");
 			superPanel.revalidate();
 			superPanel.repaint();
@@ -69,12 +81,18 @@ public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseList
 		return this.vainqueur;
 	}
 	
+	/**
+	 * setup du panel
+	 */
 	private void frameFormalities() {
 		superPanel.setSize(300,300);
 		superPanel.addMouseListener(this);
 		superPanel.setVisible(true);
 	}
 	
+	/**
+	 * Rajoute des composantes au panel
+	 */
 	private void addToPanel() {
 		superPanel.setLayout(new BoxLayout(superPanel,BoxLayout.X_AXIS));
 		for(int i=0; i<nombreDesGrilles;i++) {
@@ -83,7 +101,6 @@ public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseList
 			superPanel.add(grillePanel.panel);
 			Box.createVerticalGlue();
 		}
-		//frame.add(this.superPanel);
 	}
 	
 	public JPanel getPanel() {
@@ -93,6 +110,10 @@ public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseList
 	
 
 	@Override
+	/**
+	 * Malheuresement et mysterieusement 
+	 * cette méthode n'est pas appelée
+	 */
 	public void mouseReleased(MouseEvent arg0) {
 		//grillePanel.panel.revalidate();
 		//grillePanel.panel.repaint();
@@ -129,10 +150,18 @@ public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseList
 		return lettreCourante;
 	}
 	
+	/**
+	 * Rajoute une lettre donnée dans la ligne et colonne données à la grille dont l'id est
+	 * donné
+	 */
 	public boolean ajouterLettre(int idGrille, Lettre lettre, int ligne, int colonne) {
 		return super.ajouterLettre(idGrille, lettre, ligne, colonne);
 	}
 	
+	/**
+	 * Change la lettre courante.
+	 * X -> O et O -> X
+	 */
 	public void changerLettre() {
 		if(lettreCourante.equals(O)) {
 			lettreCourante = X;
