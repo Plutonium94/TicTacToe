@@ -25,7 +25,7 @@ public class GrillePanel extends Grille {
 	public GrillePanel(final int id,final int taille,final GroupeGrillePanel ggp) {
 		super(id,taille);
 		this.ggp = ggp;
-
+		
 		panel = new JPanel() {
 			@Override
 			public void paint(Graphics graphics) {
@@ -57,7 +57,7 @@ public class GrillePanel extends Grille {
 							int ligne = c.getLigne();
 							int colonne = c.getColonne();
 							((Graphics2D)graphics).setStroke(new BasicStroke(10));
-							graphics.setColor(Color.RED);
+							graphics.setColor(Color.GREEN);
 							graphics.drawRect(colonne*casWidth, ligne*casWidth, casWidth, casWidth);
 						}
 					}
@@ -77,9 +77,13 @@ public class GrillePanel extends Grille {
 	}
 	
 	
-	
 	private class mouseListener extends MouseAdapter {
 		@Override
+		/**
+		 * Ecoute les cliques, met x ou o si clique valide.
+		 * Change la lettre courante du GroupeGrillePanel correspondante.
+		 * et met à jour le panel
+		 */
 		public void mouseReleased(MouseEvent arg0) {
 			int x = arg0.getX(),y = arg0.getY();
 			int casWidth = size/taille;
@@ -93,6 +97,12 @@ public class GrillePanel extends Grille {
 		}
 	}
 	
+	/**
+	 * Renvoie bleu si jaune est donne
+	 * Renvoie jaune si bleu est donne
+	 * @param c
+	 * @return
+	 */
 	private static Color couleurContraire(Color c) {
 		if(c.equals(DARK_BLUE)) return YELLOW;
 		else return DARK_BLUE;
