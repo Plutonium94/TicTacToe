@@ -12,11 +12,11 @@ import java.awt.event.*;
  * @author Daniel
  *
  */
-public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseListener {
+public abstract class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseListener {
 	
     GrillePanel[] grillePanels;
 	private Lettre lettreCourante = O;
-	private Cas[] vainqueur = null;
+	protected Cas[] vainqueur = null;
 	// Cet attribut ggd est une mauvaise conception mais utile pour
 	// voir si on a gagné le niveau 3
 	private GroupeGrilleDependantes ggd = null;
@@ -58,12 +58,12 @@ public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseList
 	/**
 	 * Vérifie si le niveau est gagné.
 	 */
+	/*
 	public void winCheckFormalities() {
 		if(this.independantes) vainqueur = super.getVainqueur();
 		else {
-			/*
-			 * Vérifie si le niveau 3 est gagné.
-			 */
+			// Vérifie si le niveau 3 est gagné.
+			 
 			System.out.println("ggd's vainqueur");
 			initGGD();
 			vainqueur = ggd.getVainqueur();
@@ -74,7 +74,11 @@ public class GroupeGrillePanel extends GroupeGrilleAbstrait implements MouseList
 			superPanel.revalidate();
 			superPanel.repaint();
 		}
-	}
+	}*/
+	
+	public abstract void winCheckFormalities();
+	
+	
 	
 	@Override
 	public Cas[] getVainqueur() {

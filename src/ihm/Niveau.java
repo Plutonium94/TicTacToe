@@ -12,7 +12,11 @@ public enum Niveau {
 	private int numero; 
 	
 	private Niveau(int numero, int nombreDeGrilles,int taille,boolean independantes) {
-		ggp = new GroupeGrillePanel(nombreDeGrilles,taille,independantes);
+		switch(numero) {
+			case 1 : ggp = new Niveau1Panel(); break;
+			case 2 : ggp = new Niveau2Panel(); break;
+			case 3 : ggp = new Niveau3Panel(); break;
+		}
 		this.numero = numero;
 	}
 	

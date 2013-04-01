@@ -20,27 +20,74 @@ public class GroupeGrilleIndependantes extends GroupeGrilleAbstrait {
 		super(nombreDesGrilles,taille,true);
 	}
 	
-	GroupeGrilleIndependantes(Grille[] grilles) {
+	public GroupeGrilleIndependantes(Grille[] grilles) {
 		super(grilles.length,grilles[0].getTaille(),true);
+		for(int grille =0; grille<this.grilles.length; grille++) {
+			int grilleSize = this.grilles[grille].getTaille();
+			for(int ligne=0; ligne< grilleSize; ligne++) {
+				for(int colonne = 0; colonne <grilleSize;colonne++) {
+					this.grilles[grille].ajouterLettre(grilles[grille].getValeurCas(ligne, colonne), ligne, colonne);
+				}
+			}
+		}
 	}
 	
 	@Override
 	public Cas[] getVainqueur() {
-		Cas[] res1 = new Cas[taille];
+		System.out.println("In the beginning of ggi getVainquer " + Arrays.deepToString(grilles));
+		Cas[] res1 = null;
 		Cas[] res2 = new Cas[taille];
-		int marquer =0;
-		boolean hasWinner = false;
+		//int marquer =0;
+		//boolean hasWinner = false;
+		Cas[][] vainqueurs = new Cas[grilles.length][grilles[0].getTaille()];
 		for(int i=0; i< grilles.length; i++) {
-			if((res1 = grilles[i].getVainqueur()) != null) marquer++;
-			if(marquer != 0 && (res2 = grilles[i].getVainqueur()) != null) hasWinner=true; 
+			vainqueurs[i] = grilles[i].getVainqueur();
+			/*Cas[] temp;
+			//if(marquer == 0) System.out.println(grilles[i].getVainqueur());
+			if(marquer == 0 && (temp = grilles[i].getVainqueur()) != null) {
+				res1 = temp;
+				System.out.println("res1 initialised");
+				marquer++;
+			}
+			if(marquer != 0 && (res2 = grilles[i].getVainqueur()) != null) {
+				if(res1[0].getLettre().equals(res2[0])) {
+					hasWinner=true;
+				}
+			}*/
 		}
-		if(hasWinner) {
+		if(this.nombreDesGrilles == 1) {
+			System.out.println("ggi res1 : " +Arrays.toString(grilles));
+			return vainqueurs[0];
+		}
+		int xCpt = 0;
+		int oCpt = 0;
+		for(int i = 0; i<vainqueurs.length;i++) {
+			if(vainqueurs[i] == null) continue;
+			if(vainqueurs[i][0].getLettre().equals(Lettre.X)) xCpt++;
+			else oCpt++;
+		}
+		if(xCpt == oCpt) return null;
+		List<Cas> res = new ArrayList<Cas>();
+		for(int i=0; i<vainqueurs.length;i++) {
+			if(xCpt > oCpt && xCpt > 1 && vainqueurs[i][0].getLettre().equals(Lettre.X)) {
+				res.addAll(Arrays.asList(vainqueurs[i]));
+			} else if(xCpt < oCpt && oCpt > 1 && vainqueurs[i][0].getLettre().equals(Lettre.O)) {
+				res.addAll(Arrays.asList(vainqueurs[i]));
+			}
+		}
+		return res.toArray(new Cas[0]);
+		/*if(hasWinner) {
+			System.out.println("has winner has winner has winner");
 			List<Cas> liste = new ArrayList<Cas>();
 			liste.addAll(Arrays.asList(res1));
 			liste.addAll(Arrays.asList(res2));
+			System.out.println("Hey soul " + liste);
 			return liste.toArray(new Cas[0]);
+		} if(this.nombreDesGrilles == 1) {
+			System.out.println("ggi res1 : " +Arrays.toString(grilles));
+			return res1;
 		}
-		return null;
+		return null;*/
 	}
 	
 	/**

@@ -11,7 +11,7 @@ public class MenuPrincipal extends MenuAbstrait {
 
 	@Override
 	protected String[] nomOptions() {
-		return new String[]{"Jouer","Quitter"};
+		return new String[]{"Nouveau Jeu","Quitter"};
 	}
 
 	@Override
@@ -22,7 +22,8 @@ public class MenuPrincipal extends MenuAbstrait {
 			case 0 : menu = new MenuChoixAdversaire(); break;
 			case 1 : System.exit(0);
 		}
-		menu.setVisible(true);
+		this.dispose();
+		if(menu != null) menu.setVisible(true);
 	}
 
 	@Override

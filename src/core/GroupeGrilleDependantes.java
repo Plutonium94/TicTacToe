@@ -18,6 +18,18 @@ public class GroupeGrilleDependantes extends GroupeGrilleAbstrait {
 		super(nombreDeGrilles, nombreDeGrilles, false);
 	}
 	
+	public GroupeGrilleDependantes(Grille[] grilles) {
+		super(grilles.length,grilles[0].taille,false);
+		for(int grille =0; grille<this.grilles.length; grille++) {
+			int grilleSize = this.grilles[grille].getTaille();
+			for(int ligne=0; ligne< grilleSize; ligne++) {
+				for(int colonne = 0; colonne <grilleSize;colonne++) {
+					this.grilles[grille].ajouterLettre(grilles[grille].getValeurCas(ligne, colonne), ligne, colonne);
+				}
+			}
+		}
+	}
+	
 	/**
 	 * Renvoie l'alignement gagnant de la partie si cette dernière est terminée.
 	 * Sinon renvoie null

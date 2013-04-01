@@ -60,9 +60,10 @@ public class GrillePanel extends Grille {
 				// animation victoire
 				// encadre les cas gangants en vert epaisse
 				Cas[] vainqueur = ggp.getVainqueur();
-				if(ggp.getVainqueur() != null) {
+				if(vainqueur != null) {
+					System.out.println("On a déjà gagné");
 					for(Cas c : vainqueur) {
-						if(c.getGrilleId() == id) {
+						if( c!= null && c.getGrilleId() == id) {
 							int ligne = c.getLigne();
 							int colonne = c.getColonne();
 							((Graphics2D)graphics).setStroke(new BasicStroke(10));

@@ -92,6 +92,7 @@ public class Grille {
 	 * 			null sinon
 	 */
 	public Cas[] getVainqueur() {
+		System.out.println(this + " called");
 		Cas[] res = new Cas[taille];
 		for(Lettre lettre : Lettre.values()) {
 			for(int i=0; i<this.taille; i++) {
