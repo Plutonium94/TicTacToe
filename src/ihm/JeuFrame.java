@@ -17,6 +17,7 @@ public class JeuFrame extends JFrame {
 	
 	private JPanel niveauPanel = niveauCourant.getPanel();
 	private JPanel buttonPanel = new ButtonPanel();
+	private JPanel messagePanel = new MessagePanel();
 	
 	public JeuFrame() {
 		frameFormalities();
@@ -29,6 +30,7 @@ public class JeuFrame extends JFrame {
 		this.setBackground(Color.WHITE);
 		this.add(niveauPanel); 
 		this.add(buttonPanel,BorderLayout.SOUTH);
+		this.add(messagePanel, BorderLayout.EAST);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
