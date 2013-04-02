@@ -12,6 +12,8 @@ public class MessagePanel extends JPanel {
 	
 	public MessagePanel(String message) {
 		msgLabel = new JLabel(message);
+		msgLabel.setForeground(Color.BLACK);
+		this.add(msgLabel);
 		this.setBackground(Color.CYAN);
 		this.setVisible(true);
 	}

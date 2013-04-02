@@ -20,6 +20,8 @@ public abstract class GroupeGrillePanel extends GroupeGrilleAbstrait implements 
 	// Cet attribut ggd est une mauvaise conception mais utile pour
 	// voir si on a gagné le niveau 3
 	private GroupeGrilleDependantes ggd = null;
+	private Cas casCourante = new Cas(grilles[0],O,1,1);
+	private JeuFrame jeuFrame;
 	
 	// Le panel effectif
 	JPanel superPanel = new JPanel();
@@ -27,13 +29,19 @@ public abstract class GroupeGrillePanel extends GroupeGrilleAbstrait implements 
 
 	public GroupeGrillePanel(int nombreDeGrilles, int taille, boolean independantes) {
 		super(nombreDeGrilles,taille,independantes);
+		if(nombreDeGrilles != 1) this.casCourante = new Cas(grilles[1],Lettre.O,1,1);
+		else {
+			this.casCourante = new Cas(grilles[0],Lettre.O,1,1);
+		}
 		grillePanels = new GrillePanel[nombreDeGrilles];
+		
 		if(!independantes) {
 			initGGD();
 		}
-		frameFormalities();
+		
 		addToPanel();
 		superPanel.setBackground(Color.WHITE);
+		frameFormalities();
 	}
 	
 	public GroupeGrillePanel(GroupeGrilleAbstrait gga) {
@@ -91,7 +99,11 @@ public abstract class GroupeGrillePanel extends GroupeGrilleAbstrait implements 
 	private void frameFormalities() {
 		superPanel.setSize(300,300);
 		superPanel.addMouseListener(this);
+		superPanel.addKeyListener(new MyKeyAdapter());
 		superPanel.setVisible(true);
+		if(this.casCourante == null ) System.out.println("cas courante null");
+		else System.out.println("cas courante : " + this.casCourante);
+		superPanel.setFocusable(true);
 	}
 	
 	/**
@@ -110,6 +122,11 @@ public abstract class GroupeGrillePanel extends GroupeGrilleAbstrait implements 
 	public JPanel getPanel() {
 		return superPanel;
 		//return new GroupeGrillePanel(this.nombreDesGrilles,this.taille,this.independantes);
+	}
+	
+	public Cas getCasCourante() {
+		if(casCourante == null) System.out.println("getter says : cas courante null");
+		return this.casCourante;
 	}
 	
 
@@ -154,6 +171,14 @@ public abstract class GroupeGrillePanel extends GroupeGrilleAbstrait implements 
 		return lettreCourante;
 	}
 	
+	public void setJeuFrame(JeuFrame jf) {
+		this.jeuFrame = jf;
+	}
+	
+	public JeuFrame getJeuFrame() {
+		return this.jeuFrame;
+	}
+	
 	/**
 	 * Rajoute une lettre donnée dans la ligne et colonne données à la grille dont l'id est
 	 * donné
@@ -172,6 +197,30 @@ public abstract class GroupeGrillePanel extends GroupeGrilleAbstrait implements 
 		}
 		else if(lettreCourante.equals(X)) lettreCourante = O;
 		else throw new RuntimeException("Changer lettre inconnue");
+	}
+	
+	private class MyKeyAdapter extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			int code = e.getKeyCode();
+			int ligne = casCourante.getLigne();
+			int colonne = casCourante.getColonne();
+			//System.out.println("key code : " + code);
+			//Cas res = null;
+			boolean b = false;
+			switch(code) {
+				case KeyEvent.VK_UP : if(ligne > 0) ligne--; break;
+				case KeyEvent.VK_DOWN : if(ligne < casCourante.getGrille().getTaille()-1) ligne++; break;
+				case KeyEvent.VK_LEFT : if(colonne > 0) colonne--; break;
+				case KeyEvent.VK_RIGHT : if(colonne < casCourante.getGrille().getTaille()-1) colonne++; break;
+				case KeyEvent.VK_SPACE : b =ajouterLettre(casCourante.getGrilleId(),Lettre.O,ligne,colonne); break;
+				//KeyEvent.
+			}
+			if(b) System.out.println("Boobobobobooboboboboboobobobobob");
+			casCourante = new Cas(casCourante.getGrille(),null,ligne,colonne);
+			superPanel.revalidate();
+			superPanel.repaint();
+		}
 	}
 
 }

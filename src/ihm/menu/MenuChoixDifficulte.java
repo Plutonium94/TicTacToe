@@ -1,5 +1,6 @@
 package ihm.menu;
 
+import ihm.JeuFrame;
 import devintAPI.MenuAbstrait;
 
 @SuppressWarnings("serial")
@@ -10,12 +11,18 @@ public class MenuChoixDifficulte extends MenuAbstrait {
 	}
 	@Override
 	protected String[] nomOptions() {
-		return new String[]{"Facile","Moyenne","Difficile"};
+		return new String[]{"Facile","Moyenne","Difficile","Retour"};
 	}
 
 	@Override
 	protected void lancerOption(int i) {
-		// TODO Auto-generated method stub
+		this.dispose();
+		switch(i) {
+			case 0 : new JeuFrame();
+			case 1 : new JeuFrame();
+			case 2 : new JeuFrame();
+			case 3 : new MenuChoixAdversaire();
+		}
 
 	}
 

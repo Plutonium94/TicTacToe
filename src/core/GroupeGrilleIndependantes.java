@@ -34,7 +34,7 @@ public class GroupeGrilleIndependantes extends GroupeGrilleAbstrait {
 	
 	@Override
 	public Cas[] getVainqueur() {
-		System.out.println("In the beginning of ggi getVainquer " + Arrays.deepToString(grilles));
+		//System.out.println("In the beginning of ggi getVainquer " + Arrays.deepToString(grilles));
 		Cas[] res1 = null;
 		Cas[] res2 = new Cas[taille];
 		//int marquer =0;
@@ -56,7 +56,7 @@ public class GroupeGrilleIndependantes extends GroupeGrilleAbstrait {
 			}*/
 		}
 		if(this.nombreDesGrilles == 1) {
-			System.out.println("ggi res1 : " +Arrays.toString(grilles));
+			//System.out.println("ggi res1 : " +Arrays.toString(grilles));
 			return vainqueurs[0];
 		}
 		int xCpt = 0;

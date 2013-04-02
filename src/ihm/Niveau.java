@@ -12,6 +12,7 @@ public enum Niveau {
 	private int numero; 
 	
 	private Niveau(int numero, int nombreDeGrilles,int taille,boolean independantes) {
+		
 		switch(numero) {
 			case 1 : ggp = new Niveau1Panel(); break;
 			case 2 : ggp = new Niveau2Panel(); break;
@@ -26,6 +27,10 @@ public enum Niveau {
 	
 	public int getNumero() {
 		return numero;
+	}
+	
+	public void setJeuFrame(JeuFrame jf) {
+		this.ggp.setJeuFrame(jf);
 	}
 	
 	public Niveau niveauProchain() {

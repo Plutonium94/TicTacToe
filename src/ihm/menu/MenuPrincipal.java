@@ -29,7 +29,7 @@ public class MenuPrincipal extends MenuAbstrait {
 	@Override
 	protected String wavAccueil() {
 		// TODO Auto-generated method stub
-		return null;
+		return "../ressources/wav/bienvenue.wav";
 	}
 
 	@Override

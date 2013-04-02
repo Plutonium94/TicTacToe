@@ -57,11 +57,18 @@ public class GrillePanel extends Grille {
 					}
 				}
 				
+				// encadrer les cas courante en rose
+				Cas casCourante = ggp.getCasCourante();
+				if(id == casCourante.getGrilleId()) {
+					graphics.setColor(Color.PINK);
+					((Graphics2D)graphics).setStroke(new BasicStroke(13));
+					graphics.drawRect(casCourante.getColonne()*casWidth, casCourante.getLigne()*casWidth, casWidth, casWidth);
+				} //else System.out.println("inegalinegalinegainegal");
+				
 				// animation victoire
 				// encadre les cas gangants en vert epaisse
 				Cas[] vainqueur = ggp.getVainqueur();
 				if(vainqueur != null) {
-					System.out.println("On a déjà gagné");
 					for(Cas c : vainqueur) {
 						if( c!= null && c.getGrilleId() == id) {
 							int ligne = c.getLigne();

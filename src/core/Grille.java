@@ -216,6 +216,11 @@ public class Grille {
 		else return null;
 	}
 	
+	/*
+	public Cas[] getCas(int ligne,int colonne) {
+		return new Cas(ligne,colonne);
+	}*/
+	
 	
 	/**
 	 * Renvoie une représentation textuelle de la grille

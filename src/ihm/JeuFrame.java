@@ -17,20 +17,22 @@ public class JeuFrame extends JFrame {
 	
 	private JPanel niveauPanel = niveauCourant.getPanel();
 	private JPanel buttonPanel = new ButtonPanel();
-	private JPanel messagePanel = new MessagePanel();
+	private MessagePanel messagePanel = new MessagePanel();
 	
 	public JeuFrame() {
+		this.niveauCourant.setJeuFrame(this);
 		frameFormalities();
 	}
 	
 	private void frameFormalities() {
-		setMinimumSize(new Dimension(500,500));
+		setMinimumSize(new Dimension(600,600));
 		setTitle("Tic Tac Toe");
 		setLocationRelativeTo(null);
+		messagePanel.setSize(this.getWidth()/5,this.getHeight());
 		this.setBackground(Color.WHITE);
 		this.add(niveauPanel); 
-		this.add(buttonPanel,BorderLayout.SOUTH);
-		this.add(messagePanel, BorderLayout.EAST);
+		this.add(buttonPanel,BorderLayout.EAST);
+		this.add(messagePanel, BorderLayout.SOUTH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
@@ -44,6 +46,10 @@ public class JeuFrame extends JFrame {
 	
 	public void refresh() {
 		this.getContentPane().repaint();
+	}
+	
+	public MessagePanel getMessagePanel() {
+		return this.messagePanel;
 	}
 	
 	/**
