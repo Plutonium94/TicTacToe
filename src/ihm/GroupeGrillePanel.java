@@ -122,11 +122,9 @@ public abstract class GroupeGrillePanel extends GroupeGrilleAbstrait implements 
 	
 	public JPanel getPanel() {
 		return superPanel;
-		//return new GroupeGrillePanel(this.nombreDesGrilles,this.taille,this.independantes);
 	}
 	
 	public Cas getCasCourante() {
-		//if(casCourante == null) System.out.println("getter says : cas courante null");
 		return this.casCourante;
 	}
 	
@@ -164,7 +162,6 @@ public abstract class GroupeGrillePanel extends GroupeGrilleAbstrait implements 
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -185,6 +182,11 @@ public abstract class GroupeGrillePanel extends GroupeGrilleAbstrait implements 
 	 * donné
 	 */
 	public boolean ajouterLettre(int idGrille, Lettre lettre, int ligne, int colonne) {
+		for(GrillePanel gp : this.grillePanels) {
+			if(gp.getId() == idGrille) {
+				gp.ajouterLettre(lettre, ligne, colonne);
+			}
+		}
 		return super.ajouterLettre(idGrille, lettre, ligne, colonne);
 	}
 	
@@ -202,7 +204,6 @@ public abstract class GroupeGrillePanel extends GroupeGrilleAbstrait implements 
 	
 	public void clear() {
 		for(int grille=0;grille<grilles.length;grille++) {
-			//int taille = grilles[grille].getTaille();
 			this.grillePanels[grille].clear();
 		}
 	}
@@ -226,28 +227,45 @@ public abstract class GroupeGrillePanel extends GroupeGrilleAbstrait implements 
 		@Override
 		public void keyReleased(KeyEvent e) {
 			int code = e.getKeyCode();
+			if(getNombreDeGrilles() > 1 ) {
+				System.out.println("greater code : " + code);
+			}
+			int grilleId = casCourante.getGrilleId();
 			int ligne = casCourante.getLigne();
 			int colonne = casCourante.getColonne();
-			//System.out.println("key code : " + code);
-			//Cas res = null;
-			boolean b = false;
 			switch(code) {
 				case KeyEvent.VK_UP : if(ligne > 0) ligne--; break;
 				case KeyEvent.VK_DOWN : if(ligne < casCourante.getGrille().getTaille()-1) ligne++; break;
-				case KeyEvent.VK_LEFT : if(colonne > 0) colonne--; break;
-				case KeyEvent.VK_RIGHT : if(colonne < casCourante.getGrille().getTaille()-1) colonne++; break;
-				case KeyEvent.VK_SPACE : b =ajouterLettre(casCourante.getGrilleId(),lettreCourante,ligne,colonne); break;
-				//KeyEvent.
+				case KeyEvent.VK_LEFT : {
+					if(colonne > 0) {
+						colonne--; 
+					}
+					else if(grilleId != 0){
+						grilleId--;
+						colonne = casCourante.getGrille().getTaille() - 1;
+					}
+					break;
+				}
+				case KeyEvent.VK_RIGHT : { 
+					if(colonne < casCourante.getGrille().getTaille()-1) {
+						colonne++; 
+					} else if(grilleId != getNombreDeGrilles()- 1) {
+						grilleId++;
+						colonne = 0;
+					}
+				}
+				case KeyEvent.VK_SPACE : {
+					boolean b = ajouterLettre(casCourante.getGrilleId(),lettreCourante,ligne,colonne); 
+					if(b) {
+						changerLettre();
+						winCheckFormalities();
+					}
+					break;
+				}
 			}
-			if(b) System.out.println("Boobobobobooboboboboboobobobobob");
-			casCourante = new Cas(casCourante.getGrille(),null,ligne,colonne);
+			//if(b) System.out.println("Boobobobobooboboboboboobobobobob");
+			casCourante = new Cas(grilles[grilleId],null,ligne,colonne);
 			refresh();
-			/*for(GrillePanel gpanel : grillePanels) {
-				gpanel.panel.revalidate();
-				gpanel.panel.repaint();
-			}
-			superPanel.revalidate();
-			superPanel.repaint();*/
 		}
 	}
 

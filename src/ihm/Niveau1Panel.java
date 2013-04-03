@@ -1,6 +1,6 @@
 package ihm;
 
-import java.util.Arrays;
+
 
 import core.*;
 
@@ -23,6 +23,7 @@ public class Niveau1Panel extends GroupeGrillePanel {
 	
 	@Override
 	public void winCheckFormalities() {
+		//System.out.println("Niveau 1 win form appelele");
 		GroupeGrilleIndependantes ggi = new GroupeGrilleIndependantes(grilles);
 		//System.out.println("win check n1 " +Arrays.deepToString(grilles));
 		if((vainqueur = ggi.getVainqueur()) != null) {

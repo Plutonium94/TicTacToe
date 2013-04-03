@@ -74,6 +74,17 @@ public class JeuFrame extends JFrame {
 			this.setPreviousLevelAction();
 			this.setNextLevelAction();
 			this.setRestartLevelAction();
+			for(JButton button : new JButton[]{this.previousLevelButton,this.nextLevelButton,this.restartLevelButton}) {
+				button.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent ae) {
+						ButtonPanel.this.setFocusable(false);
+						niveauPanel.setFocusable(true);
+						niveauPanel.requestFocusInWindow();
+						System.out.println("refocused"); 
+					}
+				});
+			}
 		}
 		
 		/**
@@ -103,7 +114,9 @@ public class JeuFrame extends JFrame {
 							niveauPanel.setVisible(true);
 							niveauPanel.revalidate();
 							niveauPanel.repaint();
+							
 							JeuFrame.this.add(niveauPanel);
+							niveauPanel.requestFocusInWindow();
 						}
 						
 					}
@@ -128,8 +141,10 @@ public class JeuFrame extends JFrame {
 						niveauCourant.refresh();
 						/*niveauPanel.revalidate();
 						niveauPanel.repaint();*/
+						JeuFrame.this.getMessagePanel().setMessage("Vous êtes allé(e) au niveau precedent");
 						JeuFrame.this.add(niveauPanel);
-						JeuFrame.this.add(niveauPrecedent.getPanel());
+						//JeuFrame.this.add(niveauPrecedent.getPanel());
+						niveauPanel.requestFocusInWindow();
 					}
 				}
 			});
@@ -145,10 +160,9 @@ public class JeuFrame extends JFrame {
 					//niveauPanel.setVisible(false);
 					niveauPanel = niveauRedemarre.getPanel();
 					niveauRedemarre.refresh();
-					//niveauPanel.setVisible(true);
-					/*niveauPanel.revalidate();
-					niveauPanel.repaint();*/
+					JeuFrame.this.getMessagePanel().setMessage("Vous avez recommencé le niveau");
 					JeuFrame.this.add(niveauPanel);
+					niveauPanel.requestFocusInWindow();
 					//System.out.println("niveauRedemarre " + niveauRedemarre.getGroupeGrillePanel());
 					//System.out.println("restart restart restart restart");
 				}

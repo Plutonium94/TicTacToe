@@ -1,8 +1,8 @@
 package ihm;
 
-import static java.lang.System.out;
 import static ihm.Couleur.*;
 import core.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -70,7 +70,7 @@ public class GrillePanel extends Grille {
 					}
 					
 				}
-				if(marquer)System.out.println("painter says" + GrillePanel.super.toString());
+				//if(marquer)System.out.println("painter says" + GrillePanel.super.toString());
 				marquer = true;
 				
 				// encadrer les cas courante en rose
@@ -112,12 +112,18 @@ public class GrillePanel extends Grille {
 	
 	public void clear() {
 		super.clear();
+		//ggp = new Niveau1Panel();
 	}
 	
 	public void refresh() {
 		ggp = new GrillePanel(this.id,this.taille,this.ggp).ggp;
 		panel.revalidate();
 		panel.repaint();
+	}
+	
+	public void addLettreFormalities() {
+		ggp.changerLettre();
+		ggp.winCheckFormalities();
 	}
 	
 	
@@ -132,12 +138,20 @@ public class GrillePanel extends Grille {
 			int x = arg0.getX(),y = arg0.getY();
 			int casWidth = size/taille;
 			Lettre lettreCourante = ggp.getLettreCourante();
-			ggp.ajouterLettre(id, lettreCourante, y/casWidth, x/casWidth);
+			try {
+				ggp.ajouterLettre(id, lettreCourante, y/casWidth, x/casWidth);
+			} catch(IndexOutOfBoundsException iobe) {
+				return;
+			}
 			boolean lettreAjoutee = ajouterLettre(lettreCourante,y/casWidth , x/casWidth);
 			panel.revalidate();
 			panel.repaint();
-			if(lettreAjoutee)ggp.changerLettre();
-			ggp.winCheckFormalities();
+			//if(lettreAjoutee) {
+				ggp.changerLettre();
+				ggp.winCheckFormalities();
+			//}
+			/*if(lettreAjoutee)ggp.changerLettre();
+			ggp.winCheckFormalities();*/
 		}
 	}
 	
@@ -153,5 +167,9 @@ public class GrillePanel extends Grille {
 	}
 	
 	/* Override super methods */
+	@Override
+	public boolean ajouterLettre(Lettre lettre,int ligne,int colonne) {
+		return super.ajouterLettre(lettre, ligne, colonne);
+	}
 
 }
