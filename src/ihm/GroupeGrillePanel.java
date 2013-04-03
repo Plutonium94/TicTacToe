@@ -253,6 +253,7 @@ public abstract class GroupeGrillePanel extends GroupeGrilleAbstrait implements 
 						grilleId++;
 						colonne = 0;
 					}
+					break;
 				}
 				case KeyEvent.VK_SPACE : {
 					boolean b = ajouterLettre(casCourante.getGrilleId(),lettreCourante,ligne,colonne); 
