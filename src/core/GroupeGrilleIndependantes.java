@@ -34,26 +34,9 @@ public class GroupeGrilleIndependantes extends GroupeGrilleAbstrait {
 	
 	@Override
 	public Cas[] getVainqueur() {
-		//System.out.println("In the beginning of ggi getVainquer " + Arrays.deepToString(grilles));
-		Cas[] res1 = null;
-		Cas[] res2 = new Cas[taille];
-		//int marquer =0;
-		//boolean hasWinner = false;
 		Cas[][] vainqueurs = new Cas[grilles.length][grilles[0].getTaille()];
 		for(int i=0; i< grilles.length; i++) {
 			vainqueurs[i] = grilles[i].getVainqueur();
-			/*Cas[] temp;
-			//if(marquer == 0) System.out.println(grilles[i].getVainqueur());
-			if(marquer == 0 && (temp = grilles[i].getVainqueur()) != null) {
-				res1 = temp;
-				System.out.println("res1 initialised");
-				marquer++;
-			}
-			if(marquer != 0 && (res2 = grilles[i].getVainqueur()) != null) {
-				if(res1[0].getLettre().equals(res2[0])) {
-					hasWinner=true;
-				}
-			}*/
 		}
 		if(this.nombreDesGrilles == 1) {
 			//System.out.println("ggi res1 : " +Arrays.toString(grilles));
@@ -69,6 +52,7 @@ public class GroupeGrilleIndependantes extends GroupeGrilleAbstrait {
 		if(xCpt == oCpt) return null;
 		List<Cas> res = new ArrayList<Cas>();
 		for(int i=0; i<vainqueurs.length;i++) {
+			if(vainqueurs[i]==null) continue;
 			if(xCpt > oCpt && xCpt > 1 && vainqueurs[i][0].getLettre().equals(Lettre.X)) {
 				res.addAll(Arrays.asList(vainqueurs[i]));
 			} else if(xCpt < oCpt && oCpt > 1 && vainqueurs[i][0].getLettre().equals(Lettre.O)) {
@@ -76,18 +60,6 @@ public class GroupeGrilleIndependantes extends GroupeGrilleAbstrait {
 			}
 		}
 		return res.toArray(new Cas[0]);
-		/*if(hasWinner) {
-			System.out.println("has winner has winner has winner");
-			List<Cas> liste = new ArrayList<Cas>();
-			liste.addAll(Arrays.asList(res1));
-			liste.addAll(Arrays.asList(res2));
-			System.out.println("Hey soul " + liste);
-			return liste.toArray(new Cas[0]);
-		} if(this.nombreDesGrilles == 1) {
-			System.out.println("ggi res1 : " +Arrays.toString(grilles));
-			return res1;
-		}
-		return null;*/
 	}
 	
 	/**

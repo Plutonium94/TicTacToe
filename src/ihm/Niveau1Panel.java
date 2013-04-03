@@ -24,9 +24,9 @@ public class Niveau1Panel extends GroupeGrillePanel {
 	@Override
 	public void winCheckFormalities() {
 		GroupeGrilleIndependantes ggi = new GroupeGrilleIndependantes(grilles);
-		System.out.println("win check n1 " +Arrays.deepToString(grilles));
+		//System.out.println("win check n1 " +Arrays.deepToString(grilles));
 		if((vainqueur = ggi.getVainqueur()) != null) {
-			System.out.println("niveau1panel  won");
+			//System.out.println("niveau1panel  won");
 			jeuFrame.getMessagePanel().setMessage("Niveau 1 gagné");
 			jeuFrame.getContentPane().repaint();
 			superPanel.revalidate();

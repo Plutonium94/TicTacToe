@@ -24,6 +24,11 @@ public class JeuFrame extends JFrame {
 		frameFormalities();
 	}
 	
+	/*
+	public JeuFrame(JPanel niveauPanel) {
+		this.niveau
+	}*/
+	
 	private void frameFormalities() {
 		setMinimumSize(new Dimension(600,600));
 		setTitle("Tic Tac Toe");
@@ -60,21 +65,25 @@ public class JeuFrame extends JFrame {
 	 */
 	private class ButtonPanel extends JPanel {
 		
-		private JButton nextLevelButton = new JButton(">");
-		private JButton previousLevelButton = new JButton("<");
+		private JButton nextLevelButton = new JButton("Prochain niveau");
+		private JButton previousLevelButton = new JButton("Niveau Precedent");
+		private JButton restartLevelButton = new JButton("Recommencer le niveau");
 		
 		public ButtonPanel() {
 			addToPanel();
 			this.setPreviousLevelAction();
 			this.setNextLevelAction();
+			this.setRestartLevelAction();
 		}
 		
 		/**
 		 * Rajoute composantes au frame
 		 */
 		private void addToPanel() {
+			this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 			add(previousLevelButton);
 			add(nextLevelButton);
+			add(this.restartLevelButton);
 		}
 		
 		/**
@@ -88,6 +97,7 @@ public class JeuFrame extends JFrame {
 						Niveau niveauProchain = niveauCourant.niveauProchain();
 						if(niveauProchain != null) {
 							niveauCourant = niveauProchain;
+							niveauCourant.setJeuFrame(JeuFrame.this);
 							niveauPanel.setVisible(false);
 							niveauPanel = niveauCourant.getPanel();
 							niveauPanel.setVisible(true);
@@ -114,11 +124,33 @@ public class JeuFrame extends JFrame {
 						niveauPanel.setVisible(false);
 						niveauPanel = niveauCourant.getPanel();
 						niveauPanel.setVisible(true);
-						niveauPanel.revalidate();
-						niveauPanel.repaint();
+						niveauCourant.clear();
+						niveauCourant.refresh();
+						/*niveauPanel.revalidate();
+						niveauPanel.repaint();*/
 						JeuFrame.this.add(niveauPanel);
 						JeuFrame.this.add(niveauPrecedent.getPanel());
 					}
+				}
+			});
+		}
+		
+		private void setRestartLevelAction() {
+			this.restartLevelButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent ae) {
+					Niveau niveauRedemarre = niveauCourant;
+					niveauRedemarre.clear();
+					niveauRedemarre.setJeuFrame(JeuFrame.this);
+					//niveauPanel.setVisible(false);
+					niveauPanel = niveauRedemarre.getPanel();
+					niveauRedemarre.refresh();
+					//niveauPanel.setVisible(true);
+					/*niveauPanel.revalidate();
+					niveauPanel.repaint();*/
+					JeuFrame.this.add(niveauPanel);
+					//System.out.println("niveauRedemarre " + niveauRedemarre.getGroupeGrillePanel());
+					//System.out.println("restart restart restart restart");
 				}
 			});
 		}

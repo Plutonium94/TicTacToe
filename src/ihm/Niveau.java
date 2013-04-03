@@ -45,6 +45,14 @@ public enum Niveau {
 		else return DEUX;
 	}
 	
+	public void clear() {
+		ggp.clear();
+	}
+	
+	public void refresh() {
+		ggp.refresh();
+	}
+	
 	public boolean estTermine() {
 		return this.ggp.getVainqueur() != null || this.ggp.sontComplets();
 	}

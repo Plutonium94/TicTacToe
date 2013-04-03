@@ -22,6 +22,7 @@ public class Niveau2Panel extends GroupeGrillePanel {
 	@Override
 	public void winCheckFormalities() {
 		GroupeGrilleIndependantes ggi = new GroupeGrilleIndependantes(this.grilles);
+		//System.out.println("Checking checking ckecing checking checking");
 		if((vainqueur = ggi.getVainqueur()) !=null) {
 			this.jeuFrame.getMessagePanel().setMessage("Niveau 2 gagné");
 			superPanel.revalidate();

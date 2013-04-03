@@ -92,7 +92,7 @@ public class Grille {
 	 * 			null sinon
 	 */
 	public Cas[] getVainqueur() {
-		System.out.println(this + " called");
+		//System.out.println(this + " called");
 		Cas[] res = new Cas[taille];
 		for(Lettre lettre : Lettre.values()) {
 			for(int i=0; i<this.taille; i++) {
@@ -214,6 +214,17 @@ public class Grille {
 		Lettre lettre;
 		if((lettre = this.tableau[ligne][colonne]) != null) return lettre;
 		else return null;
+	}
+	
+	public void clear() {
+		for(int ligne = 0; ligne < taille; ligne++) {
+			for(int colonne = 0; colonne < taille; colonne++) {
+				this.tableau[ligne][colonne] = null;
+				
+			}
+		}
+		//System.out.println("cleared");
+		//System.out.println(this);
 	}
 	
 	/*
